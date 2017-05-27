@@ -2,7 +2,7 @@
 import boto.ec2
 import sys
 
-auth = {"aws_access_key_id": "AKIAJQBIKNWUSGUUGJUA", "aws_secret_access_key": "a1Krq2aJ3HhKrNjHoE82Pvh2
+auth = {"aws_access_key_id": "acceeskey", "aws_secret_access_key": "secret key
 140JNT6j1e8IdVcW"}
 
 def main():
