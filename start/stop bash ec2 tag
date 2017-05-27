@@ -1,0 +1,31 @@
+[root@agent scripts]# cat test.sh
+echo "List of instances"
+aws ec2 describe-instances --output table --query 'Reservations[].Instances[].[join(`,`,Tags[?Key==`Nam
+e`].Value),State.Name]'
+echo "wanna start/stop an instance"
+read choice
+if [ $choice == "stop" ]
+then
+        echo "Enter instance name"
+        read name
+        abc=`aws ec2 describe-instances --filters Name=tag:Name,Values=$name --query Reservations[].Ins
+tances[].[InstanceId]|grep -i "i"`
+        def=`echo $abc|sed 's/\"//g'`
+        aws ec2 stop-instances --instance-ids $def
+
+elif [ $choice == "start" ]
+then
+
+        echo "Enter instance name"
+        read name
+        abc=`aws ec2 describe-instances --filters Name=tag:Name,Values=$name --query Reservations[].Ins
+tances[].[InstanceId]|grep -i "i"`
+        def=`echo $abc|sed 's/\"//g'`
+        aws ec2 start-instances --instance-ids $def
+
+else
+        echo "Try again"
+
+
+fi
+[root@agent scripts]#
