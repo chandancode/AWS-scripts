@@ -1,0 +1,36 @@
+[root@agent ~]# cat aws.py
+import boto.ec2
+import sys
+
+auth = {"aws_access_key_id": "AKIAJQBIKNWUSGUUGJUA", "aws_secret_access_key": "a1Krq2aJ3HhKrNjHoE82Pvh2
+140JNT6j1e8IdVcW"}
+
+def main():
+        if len(sys.argv) < 2:
+                print "Usage : pyhton aws.py {start|stop} \n"
+                sys.exit(0)
+        else:
+                action=sys.argv[1]
+
+        if action == "start":
+                startinstance()
+        elif action == "stop":
+                stopinstance()
+        else:
+                print "Usage: python aws.py {start|stop}\n"
+
+def startinstance():
+
+        ec2 = boto.ec2.connect_to_region("ap-south-1", **auth)
+        ec2.start_instances(instance_ids="i-05e61241f967edfd9")
+
+
+def stopinstance():
+
+        ec2 = boto.ec2.connect_to_region("ap-south-1", **auth)
+        ec2.stop_instances(instance_ids="i-05e61241f967edfd9")
+
+
+if __name__ == '__main__':
+    main()
+[root@agent ~]#
